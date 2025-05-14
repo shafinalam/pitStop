@@ -22,13 +22,27 @@ class AppointmentConfirmationMail extends Mailable
      */
     public function __construct(array $appointmentData, array $mechanicData)
     {
-        $this->appointmentData = $appointmentData;
-        $this->mechanicData = $mechanicData;
+        // Ensure all required fields are available
+        $this->appointmentData = array_merge([
+            'client_name' => 'Client',
+            'email' => 'client@example.com',
+            'appointment_date' => date('Y-m-d'),
+            'appointment_time' => date('H:i'),
+            'car_license_number' => 'Not provided',
+            'car_engine_number' => 'Not provided',
+            'service_type' => 'General Service',
+            'description' => '',
+        ], $appointmentData);
+        
+        $this->mechanicData = array_merge([
+            'name' => 'Assigned Mechanic',
+            'specialty' => 'General Mechanic',
+        ], $mechanicData);
         
         Log::info('Creating appointment confirmation email', [
-            'client' => $appointmentData['client_name'] ?? 'No name provided',
-            'email' => $appointmentData['email'] ?? 'No email provided',
-            'date' => $appointmentData['appointment_date'] ?? 'No date provided',
+            'client' => $this->appointmentData['client_name'],
+            'email' => $this->appointmentData['email'],
+            'date' => $this->appointmentData['appointment_date'],
         ]);
     }
 
@@ -69,6 +83,8 @@ class AppointmentConfirmationMail extends Mailable
      */
     public function build()
     {
+        Log::info('Building email message for ' . $this->appointmentData['email']);
+        
         return $this->subject('Your Car Service Appointment Confirmation')
             ->view('emails.appointment-confirmation')
             ->with([

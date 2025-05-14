@@ -40,19 +40,19 @@
     <div class="container">
         <h1>Appointment Confirmation</h1>
         
-        <p>Dear {{ $appointmentData['client_name'] }},</p>
+        <p>Dear {{ $appointmentData['client_name'] ?? 'Client' }},</p>
         
         <p>Thank you for booking an appointment with Car Service Center. Your appointment has been scheduled for:</p>
         
         <div class="details">
-            <p><strong>Date:</strong> {{ $appointmentData['appointment_date'] }}</p>
-            <p><strong>Time:</strong> {{ $appointmentData['appointment_time'] }}</p>
-            <p><strong>Service Type:</strong> {{ $appointmentData['service_type'] }}</p>
-            <p><strong>Mechanic:</strong> {{ $mechanicData['name'] }} ({{ $mechanicData['specialty'] }})</p>
+            <p><strong>Date:</strong> {{ $appointmentData['appointment_date'] ?? 'To be determined' }}</p>
+            <p><strong>Time:</strong> {{ $appointmentData['appointment_time'] ?? 'To be determined' }}</p>
+            <p><strong>Service Type:</strong> {{ $appointmentData['service_type'] ?? 'General Service' }}</p>
+            <p><strong>Mechanic:</strong> {{ $mechanicData['name'] ?? 'To be assigned' }} ({{ $mechanicData['specialty'] ?? 'General Service' }})</p>
             
             <p><strong>Vehicle Information:</strong><br>
-            License Plate: {{ $appointmentData['car_license_number'] }}<br>
-            Engine Number: {{ $appointmentData['car_engine_number'] }}</p>
+            License Plate: {{ $appointmentData['car_license_number'] ?? 'Not provided' }}<br>
+            Engine Number: {{ $appointmentData['car_engine_number'] ?? 'Not provided' }}</p>
             
             @if(!empty($appointmentData['description']))
             <p><strong>Your Notes:</strong><br>
@@ -68,7 +68,7 @@
         The Car Service Center Team</p>
         
         <div class="footer">
-            <p>© 2025 Car Service Center. All rights reserved.</p>
+            <p>© {{ date('Y') }} Car Service Center. All rights reserved.</p>
         </div>
     </div>
 </body>

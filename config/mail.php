@@ -14,7 +14,8 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'log'),
+    // Force SMTP directly without reading from env - testing only
+    'default' => 'smtp',
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ return [
             'transport' => 'smtp',
             'host' => 'sandbox.smtp.mailtrap.io',
             'port' => 2525,
-            'encryption' => null,
+            'encryption' => 'tls', // Added TLS encryption
             'username' => '84dea8bb07cf55',
             'password' => 'd154e964127692',
             'timeout' => null,
@@ -108,8 +109,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'carservice@example.com',
+        'name' => 'Car Service Center',
     ],
 
 ];
