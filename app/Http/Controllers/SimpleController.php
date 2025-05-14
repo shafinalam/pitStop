@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SimpleController extends Controller
 {
     public function index()
     {
-        return 'Simple controller is working!';
+        return Inertia::render('Hello');
     }
 }

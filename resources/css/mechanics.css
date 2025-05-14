@@ -1,0 +1,128 @@
+/* MechanicsPage.css - Styling for the mechanics page */
+
+.mechanics-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.mechanics-container h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mechanics-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.mechanics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 30px;
+}
+
+.mechanic-profile {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.mechanic-profile:hover {
+  transform: translateY(-5px);
+}
+
+.mechanic-header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+}
+
+.mechanic-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3498db;
+}
+
+.mechanic-title {
+  margin-left: 20px;
+}
+
+.mechanic-title h2 {
+  color: #2c3e50;
+  margin: 0 0 5px 0;
+  font-size: 22px;
+}
+
+.mechanic-title h3 {
+  color: #3498db;
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.mechanic-details {
+  padding: 20px;
+}
+
+.mechanic-details p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.certifications {
+  margin-bottom: 20px;
+}
+
+.certifications ul {
+  margin-top: 5px;
+  padding-left: 20px;
+}
+
+.certifications li {
+  margin-bottom: 5px;
+}
+
+.book-button {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.book-button:hover {
+  background-color: #2980b9;
+  text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mechanics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mechanic-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .mechanic-title {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+} 

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TestController extends Controller
 {
     public function index()
     {
-        return 'Test controller is working!';
+        return Inertia::render('Hello');
     }
 } 
