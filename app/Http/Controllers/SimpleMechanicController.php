@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 
-class MechanicController extends Controller
+class SimpleMechanicController extends Controller
 {
-    /**
-     * Display a listing of mechanics
-     */
     public function index()
     {
-        // Return the view with mechanics data
+        // Just return the view with dummy data
         return Inertia::render('Mechanics', [
             'mechanics' => [
                 [

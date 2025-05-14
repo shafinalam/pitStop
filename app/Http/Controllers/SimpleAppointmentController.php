@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 
-class MechanicController extends Controller
+class SimpleAppointmentController extends Controller
 {
-    /**
-     * Display a listing of mechanics
-     */
     public function index()
     {
-        // Return the view with mechanics data
-        return Inertia::render('Mechanics', [
+        // Just return the view with dummy data
+        return Inertia::render('Appointments/Index', [
+            'appointments' => []
+        ]);
+    }
+    
+    public function create()
+    {
+        // Just return the view with dummy mechanics data
+        return Inertia::render('Appointments/Create', [
             'mechanics' => [
                 [
                     'id' => 1,

@@ -1,26 +1,22 @@
 import React from 'react';
+import { Head } from '@inertiajs/react';
 import Navbar from '../Components/Navbar';
 
-export default function MainLayout({ children }) {
+export default function MainLayout({ children, title }) {
     return (
-        <div className="min-h-screen bg-gray-100">
-            <Navbar />
-
-            <main className="py-10">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <>
+            <Head title={title || 'Car Service Center'} />
+            <div className="main-layout">
+                <Navbar />
+                <main className="main-content">
                     {children}
-                </div>
-            </main>
-
-            <footer className="bg-white border-t border-gray-200">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16 items-center">
-                        <div className="text-gray-500 text-sm">
-                            © 2025 Car Workshop. All rights reserved.
-                        </div>
+                </main>
+                <footer className="site-footer">
+                    <div className="footer-content">
+                        <p>&copy; {new Date().getFullYear()} Car Service Center. All rights reserved.</p>
                     </div>
-                </div>
-            </footer>
-        </div>
+                </footer>
+            </div>
+        </>
     );
 } 

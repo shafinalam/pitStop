@@ -4,35 +4,33 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Log;
 
 class MailConfigServiceProvider extends ServiceProvider
 {
     /**
-     * Register services.
+     * Register services - this runs when the application is starting up
      */
     public function register(): void
     {
-        // Override mail configuration settings
-        $this->overrideMailConfig();
+        // Set up our email configuration
+        $this->setupMailConfig();
     }
 
     /**
-     * Bootstrap services.
+     * Bootstrap services - runs after registration
      */
     public function boot(): void
     {
-        //
+        // Empty - we don't need anything here
     }
 
     /**
-     * Override the mail configuration settings to ensure SMTP is used
+     * Set up the email configuration to use Mailtrap for testing
+     * Mailtrap is a test inbox service that catches all emails without sending to real users
      */
-    protected function overrideMailConfig(): void
+    protected function setupMailConfig(): void
     {
-        Log::info('MailConfigServiceProvider: Overriding mail configuration');
-        
-        // Force SMTP configuration
+        // Configure all email settings with simple values
         Config::set('mail.default', 'smtp');
         Config::set('mail.mailers.smtp.transport', 'smtp');
         Config::set('mail.mailers.smtp.host', 'sandbox.smtp.mailtrap.io');
@@ -42,7 +40,5 @@ class MailConfigServiceProvider extends ServiceProvider
         Config::set('mail.mailers.smtp.password', 'd154e964127692');
         Config::set('mail.from.address', 'carservice@example.com');
         Config::set('mail.from.name', 'Car Service Center');
-        
-        Log::info('MailConfigServiceProvider: Mail configuration set to SMTP');
     }
 } 
