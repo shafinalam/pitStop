@@ -20,7 +20,7 @@ class AppointmentController extends Controller
     public function index()
     {
         $appointments = Auth::check() 
-            ? Auth::user()->appointments()->with('mechanic')->latest()->get() 
+            ? Appointment::where('user_id', Auth::id())->with('mechanic')->latest()->get() 
             : [];
             
         return Inertia::render('Appointments/Index', [
@@ -71,7 +71,7 @@ class AppointmentController extends Controller
 
             // Check if user already has an appointment on this date
             if (Auth::check()) {
-                $existingAppointment = Auth::user()->appointments()
+                $existingAppointment = Appointment::where('user_id', Auth::id())
                     ->whereDate('appointment_date', $validated['appointment_date'])
                     ->exists();
                     
