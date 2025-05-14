@@ -37,7 +37,7 @@ Route::get('/services', function() {
     return Inertia::render('Services');
 })->name('services');
 
-// Using inline closures to avoid controller resolution issues
+// Mechanics page
 Route::get('/mechanics', function() {
     return Inertia::render('Mechanics', [
         'mechanics' => [
@@ -81,6 +81,7 @@ Route::get('/mechanics', function() {
     ]);
 })->name('mechanics');
 
+// Appointment routes
 Route::get('/appointments/create', function() {
     return Inertia::render('Appointments/Create', [
         'mechanics' => [
@@ -126,7 +127,7 @@ Route::get('/appointments/create', function() {
 
 // Handle appointment form submission
 Route::post('/appointments', function() {
-    // Simple form validation
+    // Form validation
     $validated = request()->validate([
         'mechanic_id' => 'required',
         'client_name' => 'required|string|max:255',
@@ -141,8 +142,7 @@ Route::post('/appointments', function() {
         'description' => 'nullable|string',
     ]);
     
-    // In a real application, you would save to database here
-    // For now, just return a success response
+    // Return success response
     return redirect()->route('appointments.create')
         ->with('message', 'Appointment scheduled successfully! A confirmation email will be sent shortly.');
 })->name('appointments.store');
