@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Mechanic;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AppointmentConfirmationMail;
 
 class AppointmentController extends Controller
 {
@@ -86,6 +89,23 @@ class AppointmentController extends Controller
             }
             
             $appointment->save();
+
+            $appointmentData = [
+                'client_name' => $validated['client_name'],
+                'email' => $validated['email'],
+                'appointment_date' => $validated['appointment_date'],
+                'appointment_time' => $validated['appointment_time'],
+                'car_license_number' => $validated['car_license_number'],
+                'description' => $validated['description'] ?? 'General Service'
+            ];
+            
+            $mechanic = Mechanic::findOrFail($validated['mechanic_id']);
+            $mechanicData = [
+                'name' => $mechanic->name,
+                'specialty' => $mechanic->specialty ?? 'General Mechanic'
+            ];
+            
+            Mail::to($validated['email'])->send(new AppointmentConfirmationMail($appointmentData, $mechanicData));
             
             Log::info('Appointment saved successfully', [
                 'appointment_id' => $appointment->id,
