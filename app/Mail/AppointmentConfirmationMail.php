@@ -43,6 +43,7 @@ class AppointmentConfirmationMail extends Mailable
             'client' => $this->appointmentData['client_name'],
             'email' => $this->appointmentData['email'],
             'date' => $this->appointmentData['appointment_date'],
+            'mechanic' => $this->mechanicData['name'],
         ]);
     }
 
@@ -51,6 +52,7 @@ class AppointmentConfirmationMail extends Mailable
      */
     public function envelope(): Envelope
     {
+        Log::info('Setting email envelope with subject: Your Car Service Appointment Confirmation');
         return new Envelope(
             subject: 'Your Car Service Appointment Confirmation',
         );
@@ -61,6 +63,7 @@ class AppointmentConfirmationMail extends Mailable
      */
     public function content(): Content
     {
+        Log::info('Setting email content with view: emails.appointment-confirmation');
         return new Content(
             view: 'emails.appointment-confirmation',
         );
@@ -84,6 +87,16 @@ class AppointmentConfirmationMail extends Mailable
     public function build()
     {
         Log::info('Building email message for ' . $this->appointmentData['email']);
+        
+        // Extra debugging for mail configuration
+        $mailConfig = [
+            'mailer' => config('mail.default'),
+            'host' => config('mail.mailers.smtp.host'),
+            'port' => config('mail.mailers.smtp.port'),
+            'from_address' => config('mail.from.address'),
+            'from_name' => config('mail.from.name'),
+        ];
+        Log::info('Mail configuration:', $mailConfig);
         
         return $this->subject('Your Car Service Appointment Confirmation')
             ->view('emails.appointment-confirmation')
