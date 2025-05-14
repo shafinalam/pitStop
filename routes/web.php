@@ -3,8 +3,6 @@
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TextToSpeechController;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\AppointmentConfirmationMail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -13,19 +11,15 @@ use PHPMailer\PHPMailer\Exception;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Basic Page Routes
 |--------------------------------------------------------------------------
+| These routes serve the main pages of the application
 */
 
 // Home page
 Route::get('/', function() {
     return Inertia::render('Home');
 })->name('home');
-
-// Simple test routes
-Route::get('/hello', function() {
-    return Inertia::render('Hello');
-});
 
 // About page
 Route::get('/about', function() {
@@ -42,97 +36,110 @@ Route::get('/services', function() {
     return Inertia::render('Services');
 })->name('services');
 
-// Mechanics page
+/*
+|--------------------------------------------------------------------------
+| Mechanics & Appointments
+|--------------------------------------------------------------------------
+| Routes for mechanics listing and appointment management
+*/
+
+// Mechanics listing page
 Route::get('/mechanics', function() {
-    return Inertia::render('Mechanics', [
-        'mechanics' => [
-            [
-                'id' => 1,
-                'name' => 'Alex Johnson',
-                'specialty' => 'Engine Repair',
-                'bio' => 'Expert with 8 years experience',
-                'phone' => '555-123-4567',
-                'email' => 'alex@carservice.com',
-                'is_available' => true
-            ],
-            [
-                'id' => 2,
-                'name' => 'Sarah Chen',
-                'specialty' => 'Brake Systems',
-                'bio' => 'Brake systems expert',
-                'phone' => '555-234-5678',
-                'email' => 'sarah@carservice.com',
-                'is_available' => true
-            ],
-            [
-                'id' => 3,
-                'name' => 'Miguel Rodriguez',
-                'specialty' => 'Electrical Systems',
-                'bio' => 'Electrical systems expert',
-                'phone' => '555-345-6789',
-                'email' => 'miguel@carservice.com',
-                'is_available' => true
-            ],
-            [
-                'id' => 4,
-                'name' => 'Priya Patel',
-                'specialty' => 'General Maintenance',
-                'bio' => 'General maintenance specialist',
-                'phone' => '555-456-7890',
-                'email' => 'priya@carservice.com',
-                'is_available' => true
-            ]
+    // Sample mechanics data (in a real app, this would come from database)
+    $mechanics = [
+        [
+            'id' => 1,
+            'name' => 'Alex Johnson',
+            'specialty' => 'Engine Repair',
+            'bio' => 'Expert with 8 years experience',
+            'phone' => '555-123-4567',
+            'email' => 'alex@carservice.com',
+            'is_available' => true
+        ],
+        [
+            'id' => 2,
+            'name' => 'Sarah Chen',
+            'specialty' => 'Brake Systems',
+            'bio' => 'Brake systems expert',
+            'phone' => '555-234-5678',
+            'email' => 'sarah@carservice.com',
+            'is_available' => true
+        ],
+        [
+            'id' => 3,
+            'name' => 'Miguel Rodriguez',
+            'specialty' => 'Electrical Systems',
+            'bio' => 'Electrical systems expert',
+            'phone' => '555-345-6789',
+            'email' => 'miguel@carservice.com',
+            'is_available' => true
+        ],
+        [
+            'id' => 4,
+            'name' => 'Priya Patel',
+            'specialty' => 'General Maintenance',
+            'bio' => 'General maintenance specialist',
+            'phone' => '555-456-7890',
+            'email' => 'priya@carservice.com',
+            'is_available' => true
         ]
+    ];
+    
+    return Inertia::render('Mechanics', [
+        'mechanics' => $mechanics
     ]);
 })->name('mechanics');
 
-// Appointment routes
+// Appointment creation form
 Route::get('/appointments/create', function() {
-    return Inertia::render('Appointments/Create', [
-        'mechanics' => [
-            [
-                'id' => 1,
-                'name' => 'Alex Johnson',
-                'specialty' => 'Engine Repair',
-                'bio' => 'Expert with 8 years experience',
-                'phone' => '555-123-4567',
-                'email' => 'alex@carservice.com',
-                'is_available' => true
-            ],
-            [
-                'id' => 2,
-                'name' => 'Sarah Chen',
-                'specialty' => 'Brake Systems',
-                'bio' => 'Brake systems expert',
-                'phone' => '555-234-5678',
-                'email' => 'sarah@carservice.com',
-                'is_available' => true
-            ],
-            [
-                'id' => 3,
-                'name' => 'Miguel Rodriguez',
-                'specialty' => 'Electrical Systems',
-                'bio' => 'Electrical systems expert',
-                'phone' => '555-345-6789',
-                'email' => 'miguel@carservice.com',
-                'is_available' => true
-            ],
-            [
-                'id' => 4,
-                'name' => 'Priya Patel',
-                'specialty' => 'General Maintenance',
-                'bio' => 'General maintenance specialist',
-                'phone' => '555-456-7890',
-                'email' => 'priya@carservice.com',
-                'is_available' => true
-            ]
+    // Sample mechanics data (same as above)
+    $mechanics = [
+        [
+            'id' => 1,
+            'name' => 'Alex Johnson',
+            'specialty' => 'Engine Repair',
+            'bio' => 'Expert with 8 years experience',
+            'phone' => '555-123-4567',
+            'email' => 'alex@carservice.com',
+            'is_available' => true
+        ],
+        [
+            'id' => 2,
+            'name' => 'Sarah Chen',
+            'specialty' => 'Brake Systems',
+            'bio' => 'Brake systems expert',
+            'phone' => '555-234-5678',
+            'email' => 'sarah@carservice.com',
+            'is_available' => true
+        ],
+        [
+            'id' => 3,
+            'name' => 'Miguel Rodriguez',
+            'specialty' => 'Electrical Systems',
+            'bio' => 'Electrical systems expert',
+            'phone' => '555-345-6789',
+            'email' => 'miguel@carservice.com',
+            'is_available' => true
+        ],
+        [
+            'id' => 4,
+            'name' => 'Priya Patel',
+            'specialty' => 'General Maintenance',
+            'bio' => 'General maintenance specialist',
+            'phone' => '555-456-7890',
+            'email' => 'priya@carservice.com',
+            'is_available' => true
         ]
+    ];
+    
+    return Inertia::render('Appointments/Create', [
+        'mechanics' => $mechanics
     ]);
 })->name('appointments.create');
 
 // Handle appointment form submission
 Route::post('/appointments', function() {
-    // Form validation
+    // 1. Validate the form data
     $validated = request()->validate([
         'mechanic_id' => 'required',
         'client_name' => 'required|string|max:255',
@@ -147,7 +154,7 @@ Route::post('/appointments', function() {
         'description' => 'nullable|string',
     ]);
     
-    // Get mechanic data
+    // 2. Get mechanic data
     $mechanicId = (int)$validated['mechanic_id'];
     $mechanics = [
         1 => [
@@ -174,7 +181,7 @@ Route::post('/appointments', function() {
     
     $mechanicData = $mechanics[$mechanicId] ?? ['name' => 'Selected Mechanic', 'specialty' => 'General Service'];
     
-    // Log appointment details
+    // 3. Log appointment details
     Log::info('Appointment created', [
         'client' => $validated['client_name'],
         'email' => $validated['email'],
@@ -183,10 +190,10 @@ Route::post('/appointments', function() {
         'mechanic' => $mechanicData['name'],
     ]);
     
-    // Try to send email using PHPMailer
+    // 4. Send confirmation email
     $emailSent = false;
     try {
-        // Get mail configuration from config file
+        // Get mail configuration from config
         $mailHost = config('mail.mailers.smtp.host');
         $mailPort = config('mail.mailers.smtp.port');
         $mailUsername = config('mail.mailers.smtp.username');
@@ -195,7 +202,7 @@ Route::post('/appointments', function() {
         $fromAddress = config('mail.from.address');
         $fromName = config('mail.from.name');
         
-        // Create a new PHPMailer instance
+        // Create PHPMailer instance
         $mail = new PHPMailer(true);
         
         // Configure SMTP settings
@@ -250,11 +257,8 @@ Route::post('/appointments', function() {
         </html>
         ";
         
-        // Log before sending
-        Log::info('Attempting to send email using PHPMailer with configuration', [
-            'host' => $mailHost,
-            'port' => $mailPort,
-            'username' => $mailUsername,
+        // Log sending attempt
+        Log::info('Attempting to send email using PHPMailer', [
             'to' => $validated['email']
         ]);
         
@@ -262,12 +266,12 @@ Route::post('/appointments', function() {
         $mail->send();
         $emailSent = true;
         
-        Log::info('Email sent successfully using PHPMailer');
+        Log::info('Email sent successfully');
     } catch (Exception $e) {
         Log::error('Failed to send email: ' . ($mail->ErrorInfo ?? $e->getMessage()));
     }
     
-    // Return success response
+    // 5. Return to the appointments page with success message
     return redirect()->route('appointments.create')
         ->with('message', 'Appointment scheduled successfully!' . 
                 ($emailSent ? ' A confirmation email has been sent.' : ''));
@@ -275,18 +279,20 @@ Route::post('/appointments', function() {
 
 /*
 |--------------------------------------------------------------------------
-| Text to Speech Routes
-|--------------------------------------------------------------------------
-*/
-Route::post('/tts', [TextToSpeechController::class, 'convertToSpeech']);
-
-/*
-|--------------------------------------------------------------------------
 | Authentication Routes
 |--------------------------------------------------------------------------
+| Routes for user registration, login, and logout
 */
+
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/login', [SessionController::class, 'create']);
 Route::post('/login', [SessionController::class, 'store']);
-Route::post('/logout', [SessionController::class, 'destroy']); 
+Route::post('/logout', [SessionController::class, 'destroy']);
+
+/*
+|--------------------------------------------------------------------------
+| Text to Speech Routes
+|--------------------------------------------------------------------------
+*/
+Route::post('/tts', [TextToSpeechController::class, 'convertToSpeech']); 

@@ -1,40 +1,48 @@
 <?php
+/**
+ * Test Email Script with PHPMailer
+ * 
+ * This is a standalone script to test email sending using PHPMailer
+ * You can run this script from the command line to test if emails work
+ * without involving the Laravel application.
+ */
 
-// Test email with PHPMailer instead of mail()
+// Load Composer autoloader to access PHPMailer
 require __DIR__.'/vendor/autoload.php';
 
+// Import PHPMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Mailtrap configuration
-$mailHost = 'sandbox.smtp.mailtrap.io';
-$mailPort = 2525;
-$mailUsername = '84dea8bb07cf55';
-$mailPassword = 'd154e964127692';
-$from = 'carservice@example.com';
-$fromName = 'Car Service Center';
-
-// Create a new PHPMailer instance
-$mail = new PHPMailer(true); // true enables exceptions
+// Mailtrap test configuration
+$mailHost = 'sandbox.smtp.mailtrap.io';  // Mailtrap SMTP server address
+$mailPort = 2525;                         // Mailtrap SMTP port
+$mailUsername = '84dea8bb07cf55';         // Your Mailtrap username
+$mailPassword = 'd154e964127692';         // Your Mailtrap password
+$from = 'carservice@example.com';         // Sender email address
+$fromName = 'Car Service Center';         // Sender name
 
 try {
-    // Server settings
-    $mail->isSMTP();
-    $mail->Host       = $mailHost;
-    $mail->SMTPAuth   = true;
-    $mail->Username   = $mailUsername;
-    $mail->Password   = $mailPassword;
-    $mail->SMTPSecure = 'tls';
-    $mail->Port       = $mailPort;
+    // Create and configure new PHPMailer instance
+    $mail = new PHPMailer(true);           // true enables exceptions for error handling
+    
+    // SMTP Configuration
+    $mail->isSMTP();                        // Set mailer to use SMTP
+    $mail->Host = $mailHost;                // SMTP server address
+    $mail->SMTPAuth = true;                 // Enable SMTP authentication
+    $mail->Username = $mailUsername;        // SMTP username
+    $mail->Password = $mailPassword;        // SMTP password
+    $mail->SMTPSecure = 'tls';              // Enable TLS encryption
+    $mail->Port = $mailPort;                // TCP port to connect to
     
     // Recipients
-    $mail->setFrom($from, $fromName);
-    $mail->addAddress('test@example.com'); // Add a recipient (will go to Mailtrap)
+    $mail->setFrom($from, $fromName);       // Sender email and name
+    $mail->addAddress('test@example.com');  // Add a recipient (will go to Mailtrap)
     
-    // Content
-    $mail->isHTML(true);
+    // Email Content
+    $mail->isHTML(true);                    // Set email format to HTML
     $mail->Subject = 'PHPMailer Test Email from Car Service';
-    $mail->Body    = '
+    $mail->Body = '
     <html>
     <head>
         <title>Test Email</title>
@@ -54,7 +62,7 @@ try {
     </html>
     ';
     
-    // Print configuration
+    // Print configuration for debugging
     echo "Attempting to send test email to Mailtrap using PHPMailer...\n";
     echo "Configuration:\n";
     echo "Host: $mailHost\n";
@@ -66,10 +74,12 @@ try {
     // Send the email
     $mail->send();
     
+    // Success message
     echo "Email has been sent successfully using PHPMailer!\n";
     echo "Please check your Mailtrap inbox.\n";
     
 } catch (Exception $e) {
+    // Error handling
     echo "Failed to send email. Error: " . $mail->ErrorInfo . "\n";
     echo "Exception message: " . $e->getMessage() . "\n";
 } 
