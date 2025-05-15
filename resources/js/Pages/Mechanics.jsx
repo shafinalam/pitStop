@@ -1,7 +1,6 @@
 import React from 'react';
 import { Head } from '@inertiajs/react';
 import Navbar from '../Components/Navbar';
-import '../../css/mechanics.css';
 
 export default function Mechanics({ mechanics = [] }) {
   // Default mechanics if none were provided
@@ -48,41 +47,41 @@ export default function Mechanics({ mechanics = [] }) {
       <Head title="Our Mechanics" />
       <Navbar />
       
-      <div className="mechanics-container">
-        <h1>Meet Our Expert Mechanics</h1>
-        <p className="mechanics-intro">
+      <div className="container">
+        <h1 className="page-title">Meet Our Expert Mechanics</h1>
+        <p className="text-content">
           Our team of certified mechanics are here to provide the best service for your vehicle. 
           Each specialist brings years of experience and expertise to ensure quality repairs and maintenance.
         </p>
         
-        <div className="mechanics-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {displayMechanics.map(mechanic => (
-            <div key={mechanic.id} className="mechanic-profile">
-              <div className="mechanic-header">
+            <div key={mechanic.id} className="card">
+              <div className="flex items-center mb-4">
                 <img 
                   src={`https://randomuser.me/api/portraits/${mechanic.id % 2 === 0 ? 'women' : 'men'}/${mechanic.id * 10 + 20}.jpg`} 
                   alt={`${mechanic.name} - Car Mechanic`} 
-                  className="mechanic-image"
+                  className="w-20 h-20 rounded-full mr-4"
                 />
-                <div className="mechanic-title">
-                  <h2>{mechanic.name}</h2>
-                  <h3>{mechanic.specialty}</h3>
+                <div>
+                  <h2 className="section-title">{mechanic.name}</h2>
+                  <h3 className="text-blue-600 font-medium">{mechanic.specialty}</h3>
                 </div>
               </div>
               
-              <div className="mechanic-details">
-                <p><strong>Experience:</strong> {mechanic.bio.includes('years') ? mechanic.bio.match(/\d+\s+years/)[0] : '5+ years'}</p>
-                <p>{mechanic.bio}</p>
+              <div>
+                <p className="text-content"><strong>Experience:</strong> {mechanic.bio.includes('years') ? mechanic.bio.match(/\d+\s+years/)[0] : '5+ years'}</p>
+                <p className="text-content">{mechanic.bio}</p>
                 
-                <div className="certifications">
+                <div className="mt-4">
                   <strong>Contact:</strong>
-                  <ul>
-                    <li>Phone: {mechanic.phone}</li>
-                    <li>Email: {mechanic.email}</li>
+                  <ul className="list-none mt-2">
+                    <li className="text-content-sm">Phone: {mechanic.phone}</li>
+                    <li className="text-content-sm">Email: {mechanic.email}</li>
                   </ul>
                 </div>
                 
-                <a href="/appointments/create" className="book-button">
+                <a href="/appointments/create" className="btn btn-primary mt-4 inline-block">
                   Book with {mechanic.name.split(" ")[0]}
                 </a>
               </div>

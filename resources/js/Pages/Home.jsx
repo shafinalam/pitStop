@@ -1,7 +1,6 @@
 import React from 'react';
 import { Head, Link } from '@inertiajs/react';
 import Navbar from '../Components/Navbar';
-import '../../css/home.css';
 
 export default function Home() {
   return (

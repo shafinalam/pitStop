@@ -7,11 +7,6 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/css/navbar.css',
-                'resources/css/appointment-form.css',
-                'resources/css/home.css',
-                'resources/css/appointments.css',
-                'resources/css/mechanics.css',
                 'resources/js/app.jsx'
             ],
             refresh: true,

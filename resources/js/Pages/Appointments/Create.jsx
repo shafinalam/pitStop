@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Head, useForm, router } from '@inertiajs/react';
 import Navbar from '../../Components/Navbar';
-import '../../../css/appointment-form.css';
 
 // Simple route helper function to replace the missing route() function
 const route = (name) => {

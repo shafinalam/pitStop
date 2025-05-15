@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react';
-import '../../css/appointment-form.css';
 
 export default function AppointmentForm({ mechanics }) {
     const { data, setData, post, processing, errors } = useForm({

@@ -8,60 +8,60 @@ export default function Contact() {
       <Head title="Contact Us" />
       <Navbar />
       
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Contact Us</h1>
+      <div className="container">
+        <h1 className="page-title">Contact Us</h1>
         
-        <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Get In Touch</h2>
-          <p className="text-gray-600 mb-4">
+        <div className="card">
+          <h2 className="section-title">Get In Touch</h2>
+          <p className="text-content">
             Have questions about our services or need to schedule an appointment? We're here to help! Reach out to us using any of the methods below or fill out the contact form.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div className="grid-layout">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Contact Information</h3>
-              <p className="text-gray-600 mb-1"><strong>Address:</strong> 123 Auto Service Road, Carville, CA 12345</p>
-              <p className="text-gray-600 mb-1"><strong>Phone:</strong> (555) 123-4567</p>
-              <p className="text-gray-600 mb-1"><strong>Email:</strong> info@carservicecenter.com</p>
-              <p className="text-gray-600 mb-4"><strong>Hours:</strong> Monday-Friday 8am-6pm, Saturday 9am-3pm</p>
+              <h3 className="section-title">Contact Information</h3>
+              <p className="text-content-sm"><strong>Address:</strong> 123 Auto Service Road, Carville, CA 12345</p>
+              <p className="text-content-sm"><strong>Phone:</strong> (555) 123-4567</p>
+              <p className="text-content-sm"><strong>Email:</strong> info@carservicecenter.com</p>
+              <p className="text-content"><strong>Hours:</strong> Monday-Friday 8am-6pm, Saturday 9am-3pm</p>
             </div>
             
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Send Us a Message</h3>
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+              <h3 className="section-title">Send Us a Message</h3>
+              <form>
+                <div className="form-group">
+                  <label htmlFor="name" className="form-label">Name</label>
                   <input 
                     type="text" 
                     id="name" 
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="form-input"
                     placeholder="Your name"
                   />
                 </div>
                 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <div className="form-group">
+                  <label htmlFor="email" className="form-label">Email</label>
                   <input 
                     type="email" 
                     id="email" 
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="form-input"
                     placeholder="Your email"
                   />
                 </div>
                 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <div className="form-group">
+                  <label htmlFor="message" className="form-label">Message</label>
                   <textarea 
                     id="message" 
                     rows="4" 
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="form-textarea"
                     placeholder="How can we help you?"
                   ></textarea>
                 </div>
                 
                 <button 
                   type="submit" 
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                  className="btn btn-primary"
                 >
                   Send Message
                 </button>
@@ -70,12 +70,12 @@ export default function Contact() {
           </div>
         </div>
         
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Our Location</h2>
+        <div className="card">
+          <h2 className="section-title">Our Location</h2>
           <div className="aspect-w-16 aspect-h-9 h-96 bg-gray-200 rounded-md">
             {/* In a real app, you'd embed a Google Map here */}
             <div className="flex items-center justify-center h-full">
-              <p className="text-gray-600">Map would be displayed here</p>
+              <p className="text-content">Map would be displayed here</p>
             </div>
           </div>
         </div>

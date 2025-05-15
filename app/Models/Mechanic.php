@@ -10,7 +10,6 @@ class Mechanic extends Model
 {
     use HasFactory;
 
-    // Fields that can be filled when creating or updating a mechanic
     protected $fillable = [
         'name',        // Mechanic's full name
         'specialty',   // Their area of expertise (e.g., "Engine Repair")
