@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\TextToSpeechController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -288,11 +287,4 @@ Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/login', [SessionController::class, 'create']);
 Route::post('/login', [SessionController::class, 'store']);
-Route::post('/logout', [SessionController::class, 'destroy']);
-
-/*
-|--------------------------------------------------------------------------
-| Text to Speech Routes
-|--------------------------------------------------------------------------
-*/
-Route::post('/tts', [TextToSpeechController::class, 'convertToSpeech']); 
+Route::post('/logout', [SessionController::class, 'destroy']); 
