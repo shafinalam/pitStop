@@ -7,35 +7,35 @@ export default function Mechanics({ mechanics = [] }) {
   const defaultMechanics = [
     {
       id: 1,
-      name: "Alex Johnson",
+      name: "Shafin",
       specialty: "Engine Repair",
-      bio: "Alex specializes in diagnosing and repairing complex engine issues. With 8 years of experience, he has worked on various car makes and models.",
+      bio: "Shafin specializes in diagnosing and repairing complex engine issues. With 8 years of experience, he has worked on various car makes and models.",
       phone: "555-123-4567",
-      email: "alex@carservice.com"
+      email: "shafin@carservice.com"
     },
     {
       id: 2,
-      name: "Sarah Chen",
+      name: "Arif",
       specialty: "Brake Systems",
-      bio: "Sarah is our brake system expert with over a decade of experience. She ensures your vehicle's braking system is in perfect condition for maximum safety.",
+      bio: "Arif is our brake system expert with over a decade of experience. He ensures your vehicle's braking system is in perfect condition for maximum safety.",
       phone: "555-234-5678",
-      email: "sarah@carservice.com"
+      email: "arif@carservice.com"
     },
     {
       id: 3,
-      name: "Miguel Rodriguez",
+      name: "Nilima",
       specialty: "Electrical Systems",
-      bio: "Miguel excels in diagnosing and fixing electrical issues in modern vehicles. He stays up-to-date with the latest automotive electronics technology.",
+      bio: "Nilima excels in diagnosing and fixing electrical issues in modern vehicles. She stays up-to-date with the latest automotive electronics technology.",
       phone: "555-345-6789",
-      email: "miguel@carservice.com"
+      email: "nilima@carservice.com"
     },
     {
       id: 4,
-      name: "Priya Patel",
+      name: "Fatema",
       specialty: "General Maintenance",
-      bio: "Priya handles all aspects of routine maintenance and ensures your vehicle runs smoothly. She has comprehensive knowledge of preventative care.",
+      bio: "Fatema handles all aspects of routine maintenance and ensures your vehicle runs smoothly. She has comprehensive knowledge of preventative care.",
       phone: "555-456-7890",
-      email: "priya@carservice.com"
+      email: "fatema@carservice.com"
     }
   ];
 
@@ -58,11 +58,6 @@ export default function Mechanics({ mechanics = [] }) {
           {displayMechanics.map(mechanic => (
             <div key={mechanic.id} className="card">
               <div className="flex items-center mb-4">
-                <img 
-                  src={`https://randomuser.me/api/portraits/${mechanic.id % 2 === 0 ? 'women' : 'men'}/${mechanic.id * 10 + 20}.jpg`} 
-                  alt={`${mechanic.name} - Car Mechanic`} 
-                  className="w-20 h-20 rounded-full mr-4"
-                />
                 <div>
                   <h2 className="section-title">{mechanic.name}</h2>
                   <h3 className="text-blue-600 font-medium">{mechanic.specialty}</h3>
@@ -80,10 +75,6 @@ export default function Mechanics({ mechanics = [] }) {
                     <li className="text-content-sm">Email: {mechanic.email}</li>
                   </ul>
                 </div>
-                
-                <a href="/appointments/create" className="btn btn-primary mt-4 inline-block">
-                  Book with {mechanic.name.split(" ")[0]}
-                </a>
               </div>
             </div>
           ))}

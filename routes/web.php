@@ -48,38 +48,38 @@ Route::get('/mechanics', function() {
     $mechanics = [
         [
             'id' => 1,
-            'name' => 'Alex Johnson',
+            'name' => 'Shafin',
             'specialty' => 'Engine Repair',
             'bio' => 'Expert with 8 years experience',
             'phone' => '555-123-4567',
-            'email' => 'alex@carservice.com',
+            'email' => 'shafin@carservice.com',
             'is_available' => true
         ],
         [
             'id' => 2,
-            'name' => 'Sarah Chen',
+            'name' => 'Arif',
             'specialty' => 'Brake Systems',
             'bio' => 'Brake systems expert',
             'phone' => '555-234-5678',
-            'email' => 'sarah@carservice.com',
+            'email' => 'arif@carservice.com',
             'is_available' => true
         ],
         [
             'id' => 3,
-            'name' => 'Miguel Rodriguez',
+            'name' => 'Nilima',
             'specialty' => 'Electrical Systems',
             'bio' => 'Electrical systems expert',
             'phone' => '555-345-6789',
-            'email' => 'miguel@carservice.com',
+            'email' => 'nilima@carservice.com',
             'is_available' => true
         ],
         [
             'id' => 4,
-            'name' => 'Priya Patel',
+            'name' => 'Fatema',
             'specialty' => 'General Maintenance',
             'bio' => 'General maintenance specialist',
             'phone' => '555-456-7890',
-            'email' => 'priya@carservice.com',
+            'email' => 'fatema@carservice.com',
             'is_available' => true
         ]
     ];
@@ -95,38 +95,38 @@ Route::get('/appointments/create', function() {
     $mechanics = [
         [
             'id' => 1,
-            'name' => 'Alex Johnson',
+            'name' => 'Shafin',
             'specialty' => 'Engine Repair',
             'bio' => 'Expert with 8 years experience',
             'phone' => '555-123-4567',
-            'email' => 'alex@carservice.com',
+            'email' => 'shafin@carservice.com',
             'is_available' => true
         ],
         [
             'id' => 2,
-            'name' => 'Sarah Chen',
+            'name' => 'Arif',
             'specialty' => 'Brake Systems',
             'bio' => 'Brake systems expert',
             'phone' => '555-234-5678',
-            'email' => 'sarah@carservice.com',
+            'email' => 'arif@carservice.com',
             'is_available' => true
         ],
         [
             'id' => 3,
-            'name' => 'Miguel Rodriguez',
+            'name' => 'Nilima',
             'specialty' => 'Electrical Systems',
             'bio' => 'Electrical systems expert',
             'phone' => '555-345-6789',
-            'email' => 'miguel@carservice.com',
+            'email' => 'nilima@carservice.com',
             'is_available' => true
         ],
         [
             'id' => 4,
-            'name' => 'Priya Patel',
+            'name' => 'Fatema',
             'specialty' => 'General Maintenance',
             'bio' => 'General maintenance specialist',
             'phone' => '555-456-7890',
-            'email' => 'priya@carservice.com',
+            'email' => 'fatema@carservice.com',
             'is_available' => true
         ]
     ];
@@ -158,22 +158,22 @@ Route::post('/appointments', function() {
     $mechanics = [
         1 => [
             'id' => 1,
-            'name' => 'Alex Johnson',
+            'name' => 'Shafin',
             'specialty' => 'Engine Repair',
         ],
         2 => [
             'id' => 2,
-            'name' => 'Sarah Chen',
+            'name' => 'Arif',
             'specialty' => 'Brake Systems',
         ],
         3 => [
             'id' => 3,
-            'name' => 'Miguel Rodriguez',
+            'name' => 'Nilima',
             'specialty' => 'Electrical Systems',
         ],
         4 => [
             'id' => 4,
-            'name' => 'Priya Patel',
+            'name' => 'Fatema',
             'specialty' => 'General Maintenance',
         ]
     ];

@@ -15,38 +15,38 @@ class MechanicSeeder extends Seeder
     {
         $mechanics = [
             [
-                'name' => 'Alex Johnson',
+                'name' => 'Shafin',
                 'specialty' => 'Engine Repair',
-                'bio' => 'Alex specializes in diagnosing and repairing complex engine issues. With 8 years of experience, he has worked on various car makes and models.',
+                'bio' => 'Shafin specializes in diagnosing and repairing complex engine issues. With 8 years of experience, he has worked on various car makes and models.',
                 'phone' => '555-123-4567',
-                'email' => 'alex@carservice.com',
+                'email' => 'shafin@carservice.com',
                 'max_appointments_per_day' => 5,
                 'is_available' => true
             ],
             [
-                'name' => 'Sarah Chen',
+                'name' => 'Arif',
                 'specialty' => 'Brake Systems',
-                'bio' => 'Sarah is our brake system expert with over a decade of experience. She ensures your vehicle\'s braking system is in perfect condition for maximum safety.',
+                'bio' => 'Arif is our brake system expert with over a decade of experience. He ensures your vehicle\'s braking system is in perfect condition for maximum safety.',
                 'phone' => '555-234-5678',
-                'email' => 'sarah@carservice.com',
+                'email' => 'arif@carservice.com',
                 'max_appointments_per_day' => 5,
                 'is_available' => true
             ],
             [
-                'name' => 'Miguel Rodriguez',
+                'name' => 'Nilima',
                 'specialty' => 'Electrical Systems',
-                'bio' => 'Miguel excels in diagnosing and fixing electrical issues in modern vehicles. He stays up-to-date with the latest automotive electronics technology.',
+                'bio' => 'Nilima excels in diagnosing and fixing electrical issues in modern vehicles. She stays up-to-date with the latest automotive electronics technology.',
                 'phone' => '555-345-6789',
-                'email' => 'miguel@carservice.com',
+                'email' => 'nilima@carservice.com',
                 'max_appointments_per_day' => 5,
                 'is_available' => true
             ],
             [
-                'name' => 'Priya Patel',
+                'name' => 'Fatema',
                 'specialty' => 'General Maintenance',
-                'bio' => 'Priya handles all aspects of routine maintenance and ensures your vehicle runs smoothly. She has comprehensive knowledge of preventative care.',
+                'bio' => 'Fatema handles all aspects of routine maintenance and ensures your vehicle runs smoothly. She has comprehensive knowledge of preventative care.',
                 'phone' => '555-456-7890',
-                'email' => 'priya@carservice.com',
+                'email' => 'fatema@carservice.com',
                 'max_appointments_per_day' => 5,
                 'is_available' => true
             ]
