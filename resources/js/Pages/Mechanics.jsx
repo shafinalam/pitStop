@@ -3,7 +3,6 @@ import { Head } from '@inertiajs/react';
 import Navbar from '../Components/Navbar';
 
 export default function Mechanics({ mechanics = [] }) {
-  // Default mechanics if none were provided
   const defaultMechanics = [
     {
       id: 1,
@@ -39,7 +38,6 @@ export default function Mechanics({ mechanics = [] }) {
     }
   ];
 
-  // Use the passed mechanics or fall back to default ones
   const displayMechanics = mechanics.length > 0 ? mechanics : defaultMechanics;
   
   return (

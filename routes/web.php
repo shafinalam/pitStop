@@ -15,22 +15,18 @@ use PHPMailer\PHPMailer\Exception;
 | These routes serve the main pages of the application
 */
 
-// Home page
 Route::get('/', function() {
     return Inertia::render('Home');
 })->name('home');
 
-// About page
 Route::get('/about', function() {
     return Inertia::render('About');
 })->name('about');
 
-// Contact page
 Route::get('/contact', function() {
     return Inertia::render('Contact');
 })->name('contact');
 
-// Services page
 Route::get('/services', function() {
     return Inertia::render('Services');
 })->name('services');
@@ -42,9 +38,7 @@ Route::get('/services', function() {
 | Routes for mechanics listing and appointment management
 */
 
-// Mechanics listing page
 Route::get('/mechanics', function() {
-    // Sample mechanics data (in a real app, this would come from database)
     $mechanics = [
         [
             'id' => 1,
@@ -89,9 +83,7 @@ Route::get('/mechanics', function() {
     ]);
 })->name('mechanics');
 
-// Appointment creation form
 Route::get('/appointments/create', function() {
-    // Sample mechanics data (same as above)
     $mechanics = [
         [
             'id' => 1,
@@ -136,9 +128,7 @@ Route::get('/appointments/create', function() {
     ]);
 })->name('appointments.create');
 
-// Handle appointment form submission
 Route::post('/appointments', function() {
-    // 1. Validate the form data
     $validated = request()->validate([
         'mechanic_id' => 'required',
         'client_name' => 'required|string|max:255',
@@ -153,7 +143,6 @@ Route::post('/appointments', function() {
         'description' => 'nullable|string',
     ]);
     
-    // 2. Get mechanic data
     $mechanicId = (int)$validated['mechanic_id'];
     $mechanics = [
         1 => [
@@ -180,7 +169,6 @@ Route::post('/appointments', function() {
     
     $mechanicData = $mechanics[$mechanicId] ?? ['name' => 'Selected Mechanic', 'specialty' => 'General Service'];
     
-    // 3. Log appointment details
     Log::info('Appointment created', [
         'client' => $validated['client_name'],
         'email' => $validated['email'],
@@ -189,10 +177,8 @@ Route::post('/appointments', function() {
         'mechanic' => $mechanicData['name'],
     ]);
     
-    // 4. Send confirmation email
     $emailSent = false;
     try {
-        // Get mail configuration from config
         $mailHost = config('mail.mailers.smtp.host');
         $mailPort = config('mail.mailers.smtp.port');
         $mailUsername = config('mail.mailers.smtp.username');
@@ -201,10 +187,8 @@ Route::post('/appointments', function() {
         $fromAddress = config('mail.from.address');
         $fromName = config('mail.from.name');
         
-        // Create PHPMailer instance
         $mail = new PHPMailer(true);
         
-        // Configure SMTP settings
         $mail->isSMTP();
         $mail->Host = $mailHost;
         $mail->SMTPAuth = true;
@@ -213,55 +197,17 @@ Route::post('/appointments', function() {
         $mail->SMTPSecure = $mailEncryption;
         $mail->Port = $mailPort;
         
-        // Set sender and recipient
         $mail->setFrom($fromAddress, $fromName);
         $mail->addAddress($validated['email'], $validated['client_name']);
         
-        // Email content
         $mail->isHTML(true);
-        $mail->Subject = 'Your Car Service Appointment Confirmation';
-        $mail->Body = "
-        <html>
-        <head>
-            <title>Appointment Confirmation</title>
-            <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; }
-                .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; }
-                h1 { color: #3498db; }
-                .details { background-color: #f9f9f9; padding: 15px; margin-bottom: 20px; }
-            </style>
-        </head>
-        <body>
-            <div class='container'>
-                <h1>Appointment Confirmation</h1>
-                <p>Dear {$validated['client_name']},</p>
-                <p>Thank you for booking an appointment with Car Service Center. Your appointment has been scheduled for:</p>
-                
-                <div class='details'>
-                    <p><strong>Date:</strong> {$validated['appointment_date']}</p>
-                    <p><strong>Time:</strong> {$validated['appointment_time']}</p>
-                    <p><strong>Service Type:</strong> {$validated['service_type']}</p>
-                    <p><strong>Mechanic:</strong> {$mechanicData['name']} ({$mechanicData['specialty']})</p>
-                    
-                    <p><strong>Vehicle Information:</strong><br>
-                    License Plate: {$validated['car_license_number']}<br>
-                    Engine Number: {$validated['car_engine_number']}</p>
-                </div>
-                
-                <p>Please arrive 10 minutes before your scheduled appointment time.</p>
-                <p>Thank you for choosing Car Service Center.</p>
-                <p>Regards,<br>The Car Service Center Team</p>
-            </div>
-        </body>
-        </html>
-        ";
+        $mail->Subject = 'Appointment Confirmation';
+        $mail->Body = "Appointment Complete! Your car service appointment has been confirmed.";
         
-        // Log sending attempt
         Log::info('Attempting to send email using PHPMailer', [
             'to' => $validated['email']
         ]);
         
-        // Send the email
         $mail->send();
         $emailSent = true;
         
@@ -270,10 +216,9 @@ Route::post('/appointments', function() {
         Log::error('Failed to send email: ' . ($mail->ErrorInfo ?? $e->getMessage()));
     }
     
-    // 5. Return to the appointments page with success message
     return redirect()->route('appointments.create')
-        ->with('message', 'Appointment scheduled successfully!' . 
-                ($emailSent ? ' A confirmation email has been sent.' : ''));
+        ->with('message', 'Appointment scheduled!' . 
+                ($emailSent ? ' Confirmation email sent.' : ''));
 })->name('appointments.store');
 
 /*

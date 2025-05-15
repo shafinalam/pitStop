@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from '@inertiajs/react';
 
 export default function Navbar() {
-    // Helper function to check if the current URL matches the given path
     const isActive = (path) => {
         return window.location.pathname === path;
     };

@@ -248,7 +248,7 @@ export default function Create({ mechanics, flash }) {
           <h2>Select Your Mechanic</h2>
           
           <div>
-            <label htmlFor="mechanic_id">Mechanic:</label>
+            <label htmlFor="mechanic_id">Choose a Mechanic:</label>
             <select
               id="mechanic_id"
               name="mechanic_id"
@@ -257,9 +257,9 @@ export default function Create({ mechanics, flash }) {
               required
             >
               <option value="">Select a mechanic</option>
-              {mechanics.map(mechanic => (
+              {mechanics && mechanics.map(mechanic => (
                 <option key={mechanic.id} value={mechanic.id}>
-                  {mechanic.name}
+                  {mechanic.name} - {mechanic.specialty}
                 </option>
               ))}
             </select>
@@ -269,28 +269,9 @@ export default function Create({ mechanics, flash }) {
           {/* Service Information */}
           <h2>Service Information</h2>
           
-          <div>
-            <label htmlFor="service_type">Service Type:</label>
-            <select
-              id="service_type"
-              name="service_type"
-              value={data.service_type}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a service</option>
-              <option value="Oil Change">Oil Change</option>
-              <option value="Brake Service">Brake Service</option>
-              <option value="Tire Replacement">Tire Replacement</option>
-              <option value="Regular Maintenance">Regular Maintenance</option>
-              <option value="Other">Other</option>
-            </select>
-            {errors.service_type && <div className="error">{errors.service_type}</div>}
-          </div>
-          
           <div className="two-column">
             <div>
-              <label htmlFor="appointment_date">Appointment Date:</label>
+              <label htmlFor="appointment_date">Preferred Date:</label>
               <input
                 type="date"
                 id="appointment_date"
@@ -298,39 +279,75 @@ export default function Create({ mechanics, flash }) {
                 value={data.appointment_date}
                 onChange={handleChange}
                 required
+                min={new Date().toISOString().split('T')[0]}
               />
               {errors.appointment_date && <div className="error">{errors.appointment_date}</div>}
             </div>
             
             <div>
-              <label htmlFor="appointment_time">Appointment Time:</label>
-              <input
-                type="time"
+              <label htmlFor="appointment_time">Preferred Time:</label>
+              <select
                 id="appointment_time"
                 name="appointment_time"
                 value={data.appointment_time}
                 onChange={handleChange}
                 required
-              />
+              >
+                <option value="">Select a time</option>
+                <option value="09:00">9:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="13:00">1:00 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="15:00">3:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+              </select>
               {errors.appointment_time && <div className="error">{errors.appointment_time}</div>}
             </div>
           </div>
           
           <div>
-            <label htmlFor="description">Additional Notes (Optional):</label>
+            <label htmlFor="service_type">Type of Service:</label>
+            <select
+              id="service_type"
+              name="service_type"
+              value={data.service_type}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select service type</option>
+              <option value="Oil Change">Oil Change</option>
+              <option value="Brake Service">Brake Service</option>
+              <option value="Tire Replacement">Tire Replacement</option>
+              <option value="Engine Diagnostic">Engine Diagnostic</option>
+              <option value="AC Service">AC Service</option>
+              <option value="General Maintenance">General Maintenance</option>
+              <option value="Electrical Repair">Electrical Repair</option>
+              <option value="Other">Other (Describe below)</option>
+            </select>
+            {errors.service_type && <div className="error">{errors.service_type}</div>}
+          </div>
+          
+          <div>
+            <label htmlFor="description">Additional Details:</label>
             <textarea
               id="description"
               name="description"
               value={data.description}
               onChange={handleChange}
-              placeholder="Add any specific requests or information about your vehicle issues"
+              placeholder="Please provide any additional information about your service needs"
               rows="4"
-            />
+            ></textarea>
             {errors.description && <div className="error">{errors.description}</div>}
           </div>
           
           {/* Submit Button */}
-          <button type="submit" disabled={processing}>
+          <button 
+            type="submit" 
+            className="submit-button"
+            disabled={processing}
+          >
             {processing ? 'Booking...' : 'Book Appointment'}
           </button>
         </form>
